@@ -24,4 +24,30 @@ public class Solution142 {
         }
         return slow;
     }
+
+    public ListNode detectCycle2(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+        //先快慢指针，判断是否有环
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            //有环
+            if (slow == fast) {
+                ListNode p = slow;
+                ListNode p2 = head;
+                //一个指针从 head 出发，一个从相遇点出发，两者相遇的地方就是入环节点
+                while (p != p2) {
+                    p = p.next;
+                    p2 = p2.next;
+                }
+                return p;
+            }
+        }
+        return null;
+    }
 }

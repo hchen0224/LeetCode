@@ -28,4 +28,5 @@ public class Solution147 {
         }
         return dummyNode.next;
     }
+    //dummy, 5, 2, 4, 1, 6, 7
 }
