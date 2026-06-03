@@ -40,5 +40,56 @@ public class Solution430 {
         }
         return node;
     }
+
+    /**
+     * 解法2
+     * @param head
+     * @return
+     */
+    public Node flatten2(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node dummyNode = new Node();
+        dummyNode.next = head;
+        head.prev = dummyNode;
+        flattenTail(head);
+        dummyNode.next.prev = null;
+        return dummyNode.next;
+    }
+
+    /**
+     *把以 node 开头的链表扁平化，并返回尾节点
+     */
+    private Node flattenTail(Node node) {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.child == null) {
+            if (node.next == null) {
+                return node;
+            } else {
+                return flattenTail(node.next);
+            }
+        }
+
+        Node child = node.child;
+        Node next = node.next;
+        node.next = child;
+        child.prev = node;
+        node.child = null;
+
+        Node childTail = flattenTail(child);
+
+        if (next != null) {
+            childTail.next = next;
+            next.prev = childTail;
+            return flattenTail(next);
+        } else {
+            return childTail;
+        }
+
+    }
 }
 

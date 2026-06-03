@@ -35,4 +35,37 @@ public class Solution369 {
         }
         return node;
     }
+
+    public ListNode plusOne2(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode newHead = reverseList(head);
+        ListNode cur = newHead;
+        int carry = 1;
+        while (cur != null) {
+            cur.val += carry;
+            carry = cur.val / 10;
+            cur.val %= 10;
+            if (cur.next == null && carry != 0) {
+                cur.next = new ListNode(0);
+            }
+            cur = cur.next;
+        }
+        return reverseList(newHead);
+
+    }
+
+    private ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
 }
