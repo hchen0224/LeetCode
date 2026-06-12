@@ -29,4 +29,36 @@ public class Solution110 {
         }
         return Math.max(left,right)+1;
     }
+
+
+    /**
+     * 更清晰的解法
+     * @param root
+     * @return
+     */
+    public boolean isBalanced2(TreeNode root) {
+        return getHeight(root) != -1;
+    }
+
+    private int getHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftH = getHeight(root.left);
+        if (leftH == -1) {
+            return -1;
+        }
+
+        int rightH = getHeight(root.right);
+        if (rightH == -1) {
+            return -1;
+        }
+
+        if (Math.abs(leftH - rightH) > 1) {
+            return -1;
+        }
+
+        return Math.max(leftH, rightH) + 1;
+    }
 }

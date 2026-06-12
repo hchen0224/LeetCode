@@ -22,4 +22,25 @@ public class Solution111 {
         }
         return min + 1;
     }
+
+    /**
+     * 更清晰的解法
+     * @param root
+     * @return
+     */
+    public int minDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null) {
+            return minDepth(root.right) + 1;
+        }
+
+        if (root.right == null) {
+            return minDepth(root.left) + 1;
+        }
+
+        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+    }
 }
